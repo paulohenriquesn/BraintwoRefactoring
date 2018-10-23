@@ -4,6 +4,7 @@ namespace BaintwoRefactoring
 {
     class Braintwo
     {
+
         //Int16
         internal Int16 currentMemory = 0;
         internal Int16[] Memory = new Int16[2] { 0, 0 };
@@ -30,8 +31,25 @@ namespace BaintwoRefactoring
             else
                 throw new Exception(typeErrors.ERROR_TO_READ_FILE.ToString());
         }
+
         private void InterpreterChar(char Char_)
         {
+            string numbers = "123456789";
+            string x = String.Empty;
+            string detect = String.Empty;
+
+            detect = detect + Char_;
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                x = String.Empty;
+                x = x + numbers[i];
+                if (detect.Contains(x))
+                {
+                    currentMemory = Int16.Parse(x);
+                }
+            }
+
+
             switch (Char_)
             {
                 case '+':
@@ -121,6 +139,18 @@ namespace BaintwoRefactoring
                 case '&':
                     Console.WriteLine(currentMemory);
                     break;
+                case '\'':
+                    Memory[pointerMemory] = (Int16)(Memory[pointerMemory] * -1);
+                    break;
             }
         }
+        private void RunCode()
+        {
+            if (CodeToRun != String.Empty)
+                for (int x = 0; x < CodeToRun.Length; x++)
+                { InterpreterChar(CodeToRun[x]); }
+            else
+                throw new Exception(typeErrors.ERROR_TO_INTERPRETER_CHAR.ToString());
+        }
     }
+}
