@@ -142,6 +142,40 @@ namespace BaintwoRefactoring
                 case '\'':
                     Memory[pointerMemory] = (Int16)(Memory[pointerMemory] * -1);
                     break;
+                case '\\':
+                    Memory[pointerMemory] = (Int16)(Memory[0] * Memory[1]);
+                    break;
+                case 'p':
+                    Memory[pointerMemory] = (Int16)(Math.Pow(Memory[0], Memory[1]));
+                    break;
+                case '!':
+                    Memory[pointerMemory] *= Memory[pointerMemory];
+                    break;
+                case '|':
+                    Memory[pointerMemory] = (Int16)(Memory[0] + Memory[1]);
+                    break;
+                case ')':
+                    Int16 readValue = Int16.Parse(Console.ReadLine());
+                    currentMemory = readValue;
+                    break;
+                case 'ç':
+                    Int16 backupX = 0;
+                    backup = currentMemory;
+                    currentMemory = Memory[pointerMemory];
+                    Memory[pointerMemory] = backupX;
+                    break;
+                case 'i':
+                    currentMemory = (Int16)(Memory[pointerMemory] + currentMemory);
+                    break;
+                case 'v':
+                    Memory[pointerMemory] = (Int16)(Memory[0] - Memory[1]);
+                    break;
+                case '%':
+                    currentMemory = (Int16)(Memory[0] % Memory[1]);
+                    break;
+                case 'm':
+                    Memory[pointerMemory] = (Int16)Math.Sqrt(currentMemory);
+                    break;
             }
         }
         private void RunCode()
